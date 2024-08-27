@@ -16,7 +16,7 @@ mkdir /repoveeam
 mount /dev/repoimm/repoveeam /repoveeam
 adduser veeamrepo
 echo "****** Please Enter veeamrepo Password ******"
-passwd 
+passwd veeamrepo
 mkdir /repoveeam/backups
 chown veeamrepo:veeamrepo /repoveeam/backups
 chmod 700 /repoveeam/backups
