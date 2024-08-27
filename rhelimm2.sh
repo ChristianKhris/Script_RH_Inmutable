@@ -9,19 +9,22 @@ echo "List Disks : $listadiscos"
 echo "****** Enter disk as example /dev/sdb ******: "
 read
 pvcreate $REPLY
-vgcreate repoimm2 $REPLY
-lvcreate -l 100%FREE --name repoveeam2 repoimm2
-mkfs.xfs -b size=4096 -m reflink=1,crc=1 /dev/repoimm2/repoveeam2
-mkdir /repoveeam2
-mount /dev/repoimm2/repoveeam2 /repoveeam2
-mkdir /repoveeam2/backups2
-chown veeamrepo:veeamrepo /repoveeam2/backups2
-chmod 700 /repoveeam2/backups2
-UUID=$(blkid | grep repoimm2-repoveeam2 |cut -f2 -d'='|cut -f2 -d'"')
+vgcreate repoimmsql $REPLY
+lvcreate -l 100%FREE --name  repoimmsql
+mkfs.xfs -b size=4096 -m reflink=1,crc=1 /dev/repoimmsql/
+mkdir /repoveeamaql
+mount /dev/repoimmsql/repoveeamaql /repoveeamaql
+adduser veeamrepo
+echo "****** Please Enter veeamrepo Password ******"
+passwd veeamrepo
+mkdir /repoveeam/backupsql
+chown veeamrepo:veeamrepo /repoveeam/backupsql
+chmod 700 /repoveeam/backupsql
+UUID=$(blkid | grep repoimmsql-repoveeamaql |cut -f2 -d'='|cut -f2 -d'"')
 echo "******Saving /etc/fstab as /etc/fstab.$$******"
 /bin/cp -p /etc/fstab /etc/fstab.$$
-echo "******Adding /repoveeam2 to /etc/fstab entry******"
-echo "UUID=${UUID} /repoveeam2 xfs defaults 1 1" >> /etc/fstab
+echo "******Adding /repoveeamaql to /etc/fstab entry******"
+echo "UUID=${UUID} /repoveeamaql xfs defaults 1 1" >> /etc/fstab
 echo "******Please Add The New Repository with veeamrepo single-use credentiales in Veeam Backup & Replication******"
 while [ 1 ]
 do
