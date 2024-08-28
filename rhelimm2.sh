@@ -10,8 +10,8 @@ echo "****** Enter disk as example /dev/sdb ******: "
 read 
 pvcreate $REPLY 
 vgcreate repoimmsql $REPLY 
-lvcreate -l 100%FREE --name  repoimmsql 
-mkfs.xfs -b size=4096 -m reflink=1,crc=1 /dev/repoimmsql/ 
+lvcreate -l 100%FREE --name repoveeamsql repoimmsql 
+mkfs.xfs -b size=4096 -m reflink=1,crc=1 /dev/repoimmsql/repoveeamsql
 mkdir /repoveeamsql 
 mount /dev/repoimmsql/repoveeamsql /repoveeamsql 
 mkdir /repoveeamsql/backupsql 
