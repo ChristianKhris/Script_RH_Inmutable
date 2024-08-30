@@ -1,4 +1,4 @@
 #!/bin/bash
-listadiscos=$(lsblk)
+lsblk
 hostname
 nmcli device show
