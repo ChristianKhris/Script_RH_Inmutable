@@ -14,9 +14,9 @@ lvcreate -l 100%FREE --name repoveeamsql repoimmsql
 mkfs.xfs -b size=4096 -m reflink=1,crc=1 /dev/repoimmsql/repoveeamsql
 mkdir /repoveeamsql 
 mount /dev/repoimmsql/repoveeamsql /repoveeamsql 
-mkdir /repoveeamsql/backup 
-chown veeamrepo:veeamrepo /repoveeamsql/backup 
-chmod 700 /repoveeamsql/backup 
+mkdir /repoveeamsql/backups 
+chown veeamrepo:veeamrepo /repoveeamsql/backups 
+chmod 700 /repoveeamsql/backups 
 UUID=$(blkid | grep repoimmsql-repoveeamsql |cut -f2 -d'='|cut -f2 -d'"') 
 echo "******Saving /etc/fstab as /etc/fstab.$$******" 
 /bin/cp -p /etc/fstab /etc/fstab.$$ 
